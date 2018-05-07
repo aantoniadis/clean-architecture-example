@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/aantoniadis/clean-architecture-example.svg?branch=master)](https://travis-ci.org/aantoniadis/clean-architecture-example)
+
 # Compile and run the app
 `./mvnw install && ./mvnw spring-boot:run -pl delivery`
 
