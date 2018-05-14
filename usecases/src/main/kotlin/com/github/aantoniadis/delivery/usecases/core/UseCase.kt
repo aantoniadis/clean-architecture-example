@@ -7,18 +7,13 @@ interface UseCase<in Request, out Response> {
     fun execute(request: Request): Response
 }
 
-class UseCaseExecutor {
-
+interface UseCaseExecutor {
     operator fun <RequestDto, ResponseDto, Request, Response> invoke(
         useCase: UseCase<Request, Response>,
         requestDto: RequestDto,
         requestConverter: (RequestDto) -> Request,
         responseConverter: (Response) -> ResponseDto
-    ): CompletionStage<ResponseDto> =
-        CompletableFuture
-            .supplyAsync { requestConverter(requestDto) }
-            .thenApplyAsync { useCase.execute(it) }
-            .thenApplyAsync { responseConverter(it) }
+    ): CompletionStage<ResponseDto>
 
     operator fun <RequestDto, Request> invoke(
         useCase: UseCase<Request, Unit>,
@@ -26,12 +21,6 @@ class UseCaseExecutor {
         requestConverter: (RequestDto) -> Request
     ) =
         invoke(useCase, requestDto, requestConverter, {})
-
-    operator fun <Request> invoke(
-        useCase: UseCase<Request, Unit>,
-        requestDto: Request
-    ) =
-        invoke(useCase, requestDto, { it })
 
     operator fun invoke(useCase: UseCase<Unit, Unit>) =
         invoke(useCase, Unit, { })
@@ -41,5 +30,19 @@ class UseCaseExecutor {
         responseConverter: (Response) -> ResponseDto
     ) =
         invoke(useCase, Unit, { }, responseConverter)
+}
 
+
+class UseCaseExecutorImp : UseCaseExecutor {
+
+    override operator fun <RequestDto, ResponseDto, Request, Response> invoke(
+        useCase: UseCase<Request, Response>,
+        requestDto: RequestDto,
+        requestConverter: (RequestDto) -> Request,
+        responseConverter: (Response) -> ResponseDto
+    ): CompletionStage<ResponseDto> =
+        CompletableFuture
+            .supplyAsync { requestConverter(requestDto) }
+            .thenApplyAsync { useCase.execute(it) }
+            .thenApplyAsync { responseConverter(it) }
 }

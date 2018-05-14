@@ -4,6 +4,7 @@ import com.github.aantoniadis.dataproviders.db.jpa.repositories.DBProductReposit
 import com.github.aantoniadis.dataproviders.db.jpa.repositories.JpaProductRepository
 import com.github.aantoniadis.delivery.rest.imp.ProductResourceImp
 import com.github.aantoniadis.delivery.usecases.core.UseCaseExecutor
+import com.github.aantoniadis.delivery.usecases.core.UseCaseExecutorImp
 import com.github.aantoniadis.delivery.usecases.core.gateways.ProductRepository
 import com.github.aantoniadis.delivery.usecases.core.product.CreateProductUseCase
 import com.github.aantoniadis.delivery.usecases.core.product.GetProductByIdUseCase
@@ -20,7 +21,7 @@ class Module {
     ) = ProductResourceImp(useCaseExecutor, getProductByIdUseCase, createProductUseCase)
 
     @Bean
-    fun useCaseExecutor() = UseCaseExecutor()
+    fun useCaseExecutor() = UseCaseExecutorImp()
 
     @Bean
     fun getProductByIdUseCase(productRepository: ProductRepository) = GetProductByIdUseCase(productRepository)

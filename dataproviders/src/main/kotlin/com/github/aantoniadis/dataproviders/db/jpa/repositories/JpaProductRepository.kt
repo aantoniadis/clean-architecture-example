@@ -2,7 +2,6 @@ package com.github.aantoniadis.dataproviders.db.jpa.repositories
 
 import com.github.aantoniadis.core.entities.Product
 import com.github.aantoniadis.core.entities.ProductCode
-import com.github.aantoniadis.core.unwrap
 import com.github.aantoniadis.dataproviders.db.jpa.entities.ProductEntity
 import com.github.aantoniadis.dataproviders.db.jpa.entities.toProduct
 import com.github.aantoniadis.dataproviders.db.jpa.entities.toProductEntity

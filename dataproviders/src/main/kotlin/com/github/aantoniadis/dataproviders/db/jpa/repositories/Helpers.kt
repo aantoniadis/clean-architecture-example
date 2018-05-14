@@ -1,4 +1,4 @@
-package com.github.aantoniadis.core
+package com.github.aantoniadis.dataproviders.db.jpa.repositories
 
 import java.util.*
 
