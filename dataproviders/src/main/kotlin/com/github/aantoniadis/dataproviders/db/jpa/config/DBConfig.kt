@@ -1,4 +1,4 @@
-package com.github.aantoniadis.delivery.config
+package com.github.aantoniadis.dataproviders.db.jpa.config
 
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.context.annotation.Configuration
